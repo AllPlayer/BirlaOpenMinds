@@ -1,0 +1,123 @@
+.zoom{
+    overflow: hidden;
+
+    margin: 0 auto;
+}
+.zoom img{
+    width: 100%;
+    transition: 0.2s all ease-in-out;
+    border-radius: 10px 10px 0px 0px;
+}
+.zoom:hover img{
+    transform: scale(1.2);
+    border-radius: 10px 10px 0px 0px;
+}
+.zoom h3{
+    width: 100%;
+    transition: 0.2s all ease-in-out;
+    border-radius: 10px 10px 0px 0px;
+}
+.zoom:hover h3{
+    transform: scale(1.4);
+}
+.textCard{
+    border-radius: 10px;
+    height: 100px;
+}
+.textCard h3{
+    padding: 20px;
+    margin: 0px;
+    transition: 0.2s all ease-in-out;
+}
+.textCard:hover{
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #000;
+    height: 100px;
+    box-shadow: 10px 50px 80px 0px rgba(0,0,0,.5);
+}
+.textCard:hover h3{
+    transform: scale(1.1);
+}
+.bottomCard{
+    border-radius: 10px;
+    padding: 10px; 
+    margin: 10px;
+    background-color: #d48a72;
+    box-shadow: 10px 50px 80px 0px rgba(0,0,0,.5);
+}
+.bottomCard:hover{
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #fb7648;
+    box-shadow: 10px 50px 80px 0px rgba(0,0,0,.5);
+}
+.bottomCard h5{
+    font-size: 22px;
+}
+.bottomCard svg{
+    width: 100%; 
+    height: auto;
+}
+.tableMain{
+    border: 1px solid #ddd;
+    box-shadow: 10px 50px 80px 0px rgba(0,0,0,.5);
+    margin: 20px;
+}
+.one{
+    background-color: #ddd;
+}
+.one:hover{
+    background-color: #fb7648;
+    color: #fff;
+    box-shadow: 10px 50px 80px 0px rgba(0,0,0,.5);
+}
+.two{
+    background-color: #fff;
+}
+.two:hover{
+    background-color: #fb7648;
+    color: #fff;
+    box-shadow: 10px 50px 80px 0px rgba(0,0,0,7);
+}
+ol{
+    margin: 20px 20px 0px 20px;
+    font-size: 20px;
+}
+.card2{
+    background-color: white;
+    border-radius: 5px;
+    width: 80%;
+    margin: auto;
+}
+.card-content{
+    padding: 20px;
+}
+@media only screen and (min-width: 620px) {
+    .bright{
+        border-right: 2px solid white;
+    }
+    .mobd{
+        display: none;
+    }
+    .desk{
+        display: block;
+    }
+}
+@media only screen and (max-width: 620px) {
+    .logo{
+        margin: 0px 40px;
+    }
+    .logo2{
+        margin: 0px 100px;
+    }
+    .mob{
+        width: 100%;
+    }
+    .mobd{
+        display: block;
+    }
+    .desk{
+        display: none;
+    }
+}
