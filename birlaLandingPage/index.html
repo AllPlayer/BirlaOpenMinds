@@ -107,6 +107,7 @@
     }
     function formSubmit() {
         var name = document.getElementById("name").value;
+        var name2 = document.getElementById("name2").value;
         var phone = document.getElementById("phone").value;
         var seeking = document.getElementById("seeking").value;
         const queryString = window.location.search;
@@ -139,7 +140,8 @@
                     "sequenceType": "birlaSequence",
                     "idType": "birlaSequenceId",
                     "document": {
-                        "name": name,
+                        "studentName": name,
+                        "motherName": name2,
                         "phone": phone,
                         "seeking": seeking,
                         "utm_source": utm_source,
@@ -266,8 +268,12 @@
                         <div class="card-content">
                             <form>
                                 <div class="form-group">
-                                    <label for="Fname">Name</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Full Name">
+                                    <label for="Fname">Student's Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Student's Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Mname">Mother's Name</label>
+                                    <input type="text" class="form-control" id="name2" name="name2" placeholder="Mothers's Name">
                                 </div>
                                 <div class="form-group">
                                     <label for="Contact">Contact</label>
