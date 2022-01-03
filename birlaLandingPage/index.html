@@ -1,7 +1,11 @@
 <html>
 
 <head>
-    <title>Birla Open Minds</title>
+    <title>Birla Open Minds International School Dehradun | Affiliated to CBSE | Admissions Open</title>
+    <!-- description -->
+    <meta name="description" content="Birla Open Minds International School Dehradun is the best CBSE school in Dehradun, imparting world-class education and exposure to its students. Apply for admission now! Call us +91 9760300444">
+    <!-- keywords -->
+    <meta name="keywords" content="Co-Educational School Dehradun , Best schools in Dehradun, Top CBSE School in Dehradun, top schools in dehradun , best schools in dehradun , dehradun best school , schools in dehradun , Listed top 10 schools in dehradun, Birla Open Minds International School Dehradun, best cbse schools in dehradun, list of schools in dehradun, best school in uttarakhand, Birla Open minds dehradun, Admission in Dehradun Schools, Fees Details in Dehradun School, CBSE school in Dehradun Uttarakhand">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -9,6 +13,192 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <link rel="stylesheet" href="my.css">
+    <script>
+        function phonenumber(inputtxt) {
+        if (inputtxt == undefined || inputtxt == null || inputtxt == "") {
+            return false;
+        }
+        else {
+            var phoneno = /^\d{10}$/;
+            if (inputtxt.match(phoneno))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+    function ValidateEmail(mail)
+    {
+        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail))
+        {
+            return ( true)
+        }
+        return ( false)
+    }
+    function generateOTP()
+    {
+        var digits = '0123456789';
+        var otpLength = 4;
+        var otp = '';
+        for (let i = 1; i <= otpLength; i++)
+        {
+            var index = Math.floor(Math.random() * (digits.length));
+            otp = otp + digits[index];
+        }
+        return otp;
+    }
+    var _otp;
+    var timeLeft = 30;
+    function countdown() {
+        var elem = document.getElementById('timer');
+        if (timeLeft == -1) {
+            sendAgain();
+        } else {
+            elem.innerHTML = 'Wait ' + timeLeft + ' Seconds';
+            timeLeft--;
+        }
+    }
+    function sendAgain() {
+        var elem = document.getElementById('timer');
+        elem.innerHTML = 'SEND OTP';
+    }
+    function verifyOTP() {
+        var otp = document.getElementById('otp').value;
+        var element = document.getElementById('verify');
+        if (_otp == otp) {
+            element.innerHTML = "VERIFIED";
+            document.getElementById("verify").disabled = true;
+            document.getElementById("otp").disabled = true;
+        }
+        else {
+            element.innerHTML = "TRY AGAIN";
+        }
+    }
+    function sendOtp() {
+        var timerId = setInterval(countdown, 1000);
+        var mobile = document.getElementById("phone").value;
+        document.getElementById("otpButton").disabled = true;
+        setTimeout(function() {
+            document.getElementById("otpButton").disabled = false;
+        }, 30000);
+        _otp = generateOTP();
+        console.log(_otp);
+        var dat = {
+            "apikey": "R2CKoWE26xaoLSuF",
+            "senderid": "BOMISD",
+            "number": mobile,
+            "message": "Your OTP to register is " + _otp + ". It will be valid for 2 minutes. - Shivalik College, Dehradun",
+            "format": "json"
+        }
+        fetch('https://msg.mtalkz.com/V2/http-api-post.php', {
+            method: "POST",
+            mode: 'no-cors',
+            body: JSON.stringify(dat),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        .then(data => {
+            console.log(data);
+        });
+    }
+    function formSubmit() {
+        var name = document.getElementById("name").value;
+        var phone = document.getElementById("phone").value;
+        var seeking = document.getElementById("seeking").value;
+        const queryString = window.location.search;
+        var utm_source = 'Mannual'
+        var utm_medium = 'Mannual'
+        var utm_campaign = 'Mannual'
+        var today = new Date();
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        var now = date+' '+time;
+        if (queryString != '') {
+            const urlParams = new URLSearchParams(queryString);
+            if (urlParams.has('utm_source')) {
+                utm_source = urlParams.get('utm_source')
+                utm_medium = urlParams.get('utm_medium')
+                utm_campaign = urlParams.get('utm_campaign')
+            }
+        }
+        if (phonenumber(phone)) {
+            if (name == "" || name == null || name == undefined) {
+                alert("Please provide a Name");
+            }
+            else if (seeking == "" || seeking == null || seeking == undefined) {
+                alert("Please provide a class you are seeking for");
+            }
+            else {
+                var data = {
+                    "database": 'ShivalikCollege',
+                    "collection": "birlaAdmissions",
+                    "sequenceType": "birlaSequence",
+                    "idType": "birlaSequenceId",
+                    "document": {
+                        "name": name,
+                        "phone": phone,
+                        "seeking": seeking,
+                        "utm_source": utm_source,
+                        "utm_medium": utm_medium,
+                        "utm_campaign": utm_campaign,
+                        "timestamp": now.toString()
+                    }
+                }
+                fetch('https://scapi.shivalikcollege.edu.in/create', {
+                    method: "POST",
+                    mode: 'cors',
+                    body: JSON.stringify(data),
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8"
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    res = data//SEND MSG
+                    alert("Thank You " + name + ", for submitting your query. Our admission counselors will get in touch with you shortly. This page will be redirecting you to online application form. Birla Open Minds Dehradun.");
+                    window.location.replace('thank-you.html')
+                    // var dat = {
+                    //     "apikey": "R2CKoWE26xaoLSuF",
+                    //     "senderid": "SCEDDN",
+                    //     "number": phone,
+                    //     "message": "Dear " + name + ", thank you for registering for the tech talk: 'Virtual Reality' organized by Shivalik College, Dehradun. Do not forget to join on 3rd July 2021 at 11:00 AM. Watch talk here: bit.ly/sctechtalk",
+                    //     "format": "json"
+                    // }
+                    // fetch('https://msg.mtalkz.com/V2/http-api-post.php', {
+                    //     method: "POST",
+                    //     mode: 'no-cors',
+                    //     body: JSON.stringify(dat),
+                    //     headers: {
+                    //         "Content-type": "application/json; charset=UTF-8"
+                    //     }
+                    // })
+                    // .then(data2 => {
+                    //     res2 = data2
+
+                    //     alert("Dear " + name + ", thank you for registering for the tech talk: 'Virtual Reality' organized by Shivalik College, Dehradun. Do not forget to join on 3rd July 2021 at 11:00 AM. Watch talk here: bit.ly/sctechtalk");
+
+                    // })
+                    // .catch((error) => {
+                    //     console.error('Error:', error);
+                    // });
+
+                })
+                .//SEND MSG
+                catch((error) => {
+                    console.error('Error:', error);
+                    alert("Already Registered");
+                });
+            }
+        }
+        else {
+            alert("Please provide a Correct Phone Number");
+        }
+    }
+    </script>
 </head>
 
 <body>
@@ -77,29 +267,43 @@
                             <form>
                                 <div class="form-group">
                                     <label for="Fname">Name</label>
-                                    <input type="text" class="form-control" id="Fname" placeholder="Full Name">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Full Name">
                                 </div>
                                 <div class="form-group">
                                     <label for="Contact">Contact</label>
-                                    <input type="tel" class="form-control" id="Contact" placeholder="Enter Phone Number">
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-9 col-xs-9 col-sm-9">
-                                        <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-3 col-xs-3">
+                                          <input type="text" class="form-control" disabled="" placeholder="+91 ">
+                                        </div>
+                                        <div class="col-sm-9 col-xs-9">
+                                          <div class="form-group">
+                                            <input type="text" class="form-control" pattern="^\d{4}\d{2}\d{4}$" title="Ex. 9999999999" maxlength="10" minlength="10" id="phone" name="phone" placeholder="Mobile Number" required="">
+                                          </div>
+                                        </div>
+                                        <!-- <div class="col-sm-12 col-xs-12">
+                                          <div class="form-group">
+                                            <button type="button" id="otpButton" class="btn btn-primary form-control"
+                                            style="background-color: #fb7648; margin: auto; width: 100%;" name="otpButton" onclick="sendOtp()"><div id="timer"><p>SEND OTP</p></div></button>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-8 col-xs-8">
+                                          <div class="form-group">
                                             <label for="Otp">OTP</label>
-                                            <input type="tel" class="form-control" id="Otp" placeholder="Enter OTP">
+                                            <input type="text" class="form-control" id="otp" name="otp" placeholder="O.T.P." required>
+                                          </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-3 col-xs-3 col-sm-3">
-                                        <div style="margin: 25px 0px;">
-                                            <button type="submit" class="btn btn-primary"
-                                                style="background-color: #fb7648; margin: auto; width: 100%;">Verify</button>
-                                        </div>
-                                    </div>
+                                        <div class="col-sm-4 col-xs-4">
+                                          <div class="form-group">
+                                            <label for="">&nbsp;</label>
+                                            <button type="button" id="verify" class="btn btn-primary form-control"
+                                            style="background-color: #fb7648; margin: auto; width: 100%;" name="verify" onclick="verifyOTP()"><div id="verify">VERIFY</div></button>
+                                          </div>
+                                        </div> -->
+                                      </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Email">Seeking Admission for Class</label>
-                                    <select name="c1" id="c1" style="width: 100%; min-height: 40px;">
+                                    <label for="seeking">Seeking Admission for Class</label>
+                                    <select id="seeking" name="seeking" style="width: 100%; min-height: 40px;">
                                         <option selected>Select the class you want to apply for</option>
                                         <option value="Nursery">Nursery</option>
                                         <option value="KG1">KG1</option>
@@ -121,8 +325,8 @@
                                     <label class="form-check-label" for="exampleCheck1" style="font-weight: normal; font-size: 8px;">I Agree to receive information from
                                         <br>Birla Open Minds International School Dehradun</label>
                                 </div>
-                                <button type="submit" class="btn btn-primary"
-                                    style="background-color: #fb7648; width: 100%;">Submit</button>
+                                <button type="button" class="btn btn-primary"
+                                    style="background-color: #fb7648; width: 100%;" onclick="formSubmit()">Submit</button>
                             </form>
                         </div>
                     </div>
